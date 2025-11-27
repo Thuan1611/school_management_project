@@ -4,6 +4,9 @@ import React from 'react';
 import CountChart from '../../../components/CountChart';
 
 import AttendanceChart from '../../../components/AttendanceChart';
+import FinanceChart from '../../../components/FinanceChart';
+import EventCalendar from '../../../components/EventCalendar';
+import Announcements from '../../../components/Announcements';
 
 const dashboardStats = [
     {
@@ -38,11 +41,11 @@ const dashboardStats = [
 
 const AdminPage = () => {
     return (
-        <div className="flex gap-4">
+        <div className="flex gap-4 w-full">
             {/* LEFT MAIN */}
-            <div className="w-5/6 flex flex-col gap-6">
+            <div className="w-3/4 flex  bg-gray-100 rounded-xl flex-col gap-6 min-w-0">
                 {/* TOP CARDS */}
-                <div className="grid grid-cols-4 gap-4">
+                <div className=" bg-white p-4 grid grid-cols-4 gap-4">
                     {dashboardStats.map((item) => (
                         <Card
                             key={item.id}
@@ -55,7 +58,6 @@ const AdminPage = () => {
                                 borderRadius: 16,
                                 width: '100%',
                             }}
-                            bodyStyle={{ padding: 20 }}
                         >
                             <p className="font-bold text-3xl">{item.value.toLocaleString()}</p>
                             <p className="text-gray-700">{item.title}</p>
@@ -66,22 +68,30 @@ const AdminPage = () => {
                 {/* STUDENT ATTENDANCE SECTION */}
                 <div className="flex gap-4">
                     {/* Chart */}
-                    <div className="w-1/3 ">
-                        <p className="font-bold text-2xl items-start">Students</p>
-
+                    <div className="w-1/3 bg-white  p-4 rounded-lg">
+                        <p className="font-bold text-xl mb-2">Students</p>
                         <CountChart />
                     </div>
 
                     {/* Right info */}
-                    <div className="w-2/3 bg-gray-100 p-4 rounded-lg">
+                    <div className="w-2/3 bg-white p-4 rounded-lg">
                         <p className="text-xl font-bold mb-2">Attendance </p>
                         <AttendanceChart />
+                    </div>
+                </div>
+                <div className="flex flex-col p-4 gap-4 w-full bg-white h-[500px] min-w-0 ">
+                    <p className="text-xl font-bold mb-2">Finance </p>
+                    <div style={{ width: '100%', height: '400px' }}>
+                        <FinanceChart />
                     </div>
                 </div>
             </div>
 
             {/* RIGHT SIDEBAR */}
-            <div className="w-1/3 bg-blue-500 p-4 rounded-lg text-white">Sidebar Content Here</div>
+            <div className="w-1/4 flex flex-col gap-8 ">
+                <EventCalendar />
+                <Announcements />
+            </div>
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import LayoutClient from '../layouts/LayoutClient';
 import AdminPage from '../pages/Client/Admin/AdminPage';
+import StudentPage from '../pages/Client/Student/StudentPage';
 
 const clientRoutes = [
     {
@@ -8,9 +9,13 @@ const clientRoutes = [
         children: [
             {
                 index: true,
-                Component: AdminPage
-            }
-        ]
+                Component: AdminPage,
+            },
+            {
+                path: 'student',
+                Component: StudentPage,
+            },
+        ],
     },
 ];
 export default clientRoutes;

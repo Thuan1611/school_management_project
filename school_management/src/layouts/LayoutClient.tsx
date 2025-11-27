@@ -9,7 +9,7 @@ const { Sider, Content } = Layout;
 const LayoutClient = () => {
     const [collapsed, setCollapsed] = useState(false);
     const {
-        token: { colorBgContainer, borderRadiusLG },
+        token: { borderRadiusLG },
     } = theme.useToken();
 
     return (
@@ -34,7 +34,6 @@ const LayoutClient = () => {
                         margin: '24px 16px',
                         padding: 24,
                         minHeight: 280,
-                        background: colorBgContainer,
                         borderRadius: borderRadiusLG,
                     }}
                 >
