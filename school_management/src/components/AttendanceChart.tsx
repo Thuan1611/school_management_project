@@ -1,4 +1,3 @@
-import React from 'react';
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from 'recharts';
 
 const AttendanceChart = () => {

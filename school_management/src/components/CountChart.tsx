@@ -1,4 +1,3 @@
-import React from 'react';
 import { RadialBar, RadialBarChart } from 'recharts';
 import type { IStudent } from '../types/IStudent';
 

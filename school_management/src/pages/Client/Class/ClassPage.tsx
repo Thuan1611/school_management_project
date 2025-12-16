@@ -32,7 +32,7 @@ const ClassPage = () => {
     const { data: dataTeacher } = useQuery({
         queryKey: ['teacher'],
         queryFn: async () => {
-            const { data } = await getTeacher();
+            const { data } = await getTeacher(query);
             return data;
         },
     });

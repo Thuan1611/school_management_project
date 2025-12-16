@@ -12,9 +12,12 @@ import { getTeacher } from '../../../api/teacher';
 import { subjectSchema } from '../../../schema/subjectSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { ITeacher } from '../../../types/ITeacher';
+import { useAppSelector } from '../../../hooks/hooks';
 
 type Props = { children: ReactElement; idSubject?: string };
 const FormModalSubject = ({ children, idSubject }: Props) => {
+    const query = useAppSelector((state) => state.filter.query);
+
     const navi = useNavigate();
     const [disable, setDisable] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,7 +33,7 @@ const FormModalSubject = ({ children, idSubject }: Props) => {
     const { data: dataTeacher } = useQuery({
         queryKey: ['teacher'],
         queryFn: async () => {
-            const { data } = await getTeacher();
+            const { data } = await getTeacher(query);
             return data;
         },
     });
@@ -88,7 +91,7 @@ const FormModalSubject = ({ children, idSubject }: Props) => {
         if (dataSubjectDetail) {
             reset(dataSubjectDetail);
         }
-    }, [dataSubjectDetail,reset]);
+    }, [dataSubjectDetail, reset]);
     return (
         <>
             {React.cloneElement(children, {
