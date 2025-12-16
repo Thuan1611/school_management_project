@@ -7,7 +7,6 @@ import {
     UserOutlined,
 } from '@ant-design/icons';
 import { Button, Dropdown, Input, Space, type DropdownProps, type MenuProps } from 'antd';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 const { Search } = Input;
 type Props = {
