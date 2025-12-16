@@ -3,7 +3,7 @@ import type { IStudent } from '../types/IStudent';
 import { cleanParams } from '../ultis/cleanupParams';
 import api from './api';
 
-export const getStudent = async (query: IProductQuery) => {
+export const getStudent = async (query: IProductQuery ) => {
     const params = cleanParams(query);
     const { data } = await api.get('student', { params });
     return data;

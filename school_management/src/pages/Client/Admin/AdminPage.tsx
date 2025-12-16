@@ -1,5 +1,4 @@
 import { Card } from 'antd';
-import React from 'react';
 
 import CountChart from '../../../components/CountChart';
 
@@ -7,23 +6,38 @@ import AttendanceChart from '../../../components/AttendanceChart';
 import FinanceChart from '../../../components/FinanceChart';
 import EventCalendar from '../../../components/EventCalendar';
 import Announcements from '../../../components/Announcements';
-import { useAppSelector } from '../../../hooks/hooks';
+import { useQuery } from '@tanstack/react-query';
+import { getStudent } from '../../../api/student';
+import { getTeacher } from '../../../api/teacher';
 
 const AdminPage = () => {
-    const students = useAppSelector((state) => state.student);
-    const teacher = useAppSelector((state) => state.teacher);
+    const { data: students } = useQuery({
+        queryKey: ['student'],
+        queryFn: async () => {
+            const { data } = await getStudent();
+            return data;
+        },
+    });
+    const { data: teacher } = useQuery({
+        queryKey: ['teacher'],
+        queryFn: async () => {
+            const { data } = await getTeacher();
+
+            return data;
+        },
+    });
     const dashboardStats = [
         {
             id: 1,
             title: 'Students',
-            value: students.total,
+            value: students?.length,
             date: '2024/2/15',
             bg: '#D9CCFF',
         },
         {
             id: 2,
             title: 'Teachers',
-            value: teacher.total,
+            value: teacher?.length,
             date: '2024/2/15',
             bg: '#FFEAA7',
         },
@@ -61,7 +75,7 @@ const AdminPage = () => {
                                 width: '100%',
                             }}
                         >
-                            <p className="font-bold text-3xl">{item.value.toLocaleString()}</p>
+                            <p className="font-bold text-3xl">{item?.value?.toLocaleString()}</p>
                             <p className="text-gray-700">{item.title}</p>
                         </Card>
                     ))}
@@ -72,7 +86,7 @@ const AdminPage = () => {
                     {/* Chart */}
                     <div className="w-1/3 bg-white p-4 rounded-lg">
                         <p className="font-bold text-xl mb-2 ">Students</p>
-                        <CountChart />
+                        <CountChart students={students} />
                     </div>
 
                     {/* Right info */}

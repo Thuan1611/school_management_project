@@ -1,18 +1,21 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { Button, Select, Space, Spin, Table } from 'antd';
 import { toast } from 'react-toastify';
-import { quertClient } from '../../../api/useQuery';
+import { queryClient } from '../../../api/useQuery';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import Search from 'antd/es/input/Search';
 import { resetQueryFilter, setQueryFilter } from '../../../feature/querySLice';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { SEX } from '../../../ultis/constant';
-import { deleteStudent, getStudent } from '../../../api/student';
-import type { IStudent } from '../../../types/IStudent';
+
+import { deleteClass, getClass } from '../../../api/classes';
+import type { IClass } from '../../../types/IClass';
+import { getTeacher } from '../../../api/teacher';
+import type { ITeacher } from '../../../types/ITeacher';
 
 const ClassPage = () => {
-    const key = 'student';
+    const key = 'classes';
     const dispatch = useAppDispatch();
     const query = useAppSelector((state) => state.filter.query);
     const queryDebounce = useDebounce(query, 500);
@@ -21,18 +24,24 @@ const ClassPage = () => {
     const { data, isPending, error } = useQuery({
         queryKey: [key, queryDebounce],
         queryFn: async () => {
-            const { data } = await getStudent(queryDebounce);
+            const { data } = await getClass();
             return data;
         },
         staleTime: 100,
     });
-
+    const { data: dataTeacher } = useQuery({
+        queryKey: ['teacher'],
+        queryFn: async () => {
+            const { data } = await getTeacher();
+            return data;
+        },
+    });
     //Xóa Teacher
     const mutationDelete = useMutation({
         mutationKey: [key],
-        mutationFn: (_id: string) => deleteStudent(_id),
+        mutationFn: (_id: string) => deleteClass(_id),
         onSuccess: () => {
-            quertClient.invalidateQueries({ queryKey: [key] });
+            queryClient.invalidateQueries({ queryKey: [key] });
             toast.success('Xóa thành công');
         },
     });
@@ -43,35 +52,31 @@ const ClassPage = () => {
             dataIndex: '_id',
         },
         {
-            title: 'Họ Và Tên',
-            dataIndex: 'name + sirname',
-            render: (_: any, record: IStudent) => `${record.name} ${record.surname}`,
+            title: 'Tên lớp',
+            dataIndex: 'name',
         },
 
         {
-            title: 'Lớp',
+            title: 'Sĩ số',
+            dataIndex: 'capacity',
+        },
+        {
+            title: 'Khối',
             dataIndex: 'grade',
         },
         {
-            title: 'Ngày sinh',
-            dataIndex: 'birthday',
-        },
-        {
-            title: 'Giới tính',
-            dataIndex: 'sex',
-            render: (_: any, record: IStudent) => (record.sex == 'male' ? 'Nam' : 'Nữ'),
-        },
-        {
-            title: 'lớp',
-            dataIndex: 'classId',
-        },
-        {
-            title: 'Chủ nhiệm lớp',
-            dataIndex: 'parentId',
+            title: 'Chủ nhiệm',
+            dataIndex: 'supervisor',
+            render: (_: any, record: IClass) => {
+                const data = dataTeacher?.find((c: ITeacher) => {
+                    return String(c._id) === String(record.supervisor);
+                });
+                return data.name;
+            },
         },
         {
             title: 'Actions',
-            render: (_: any, record: IStudent) => (
+            render: (_: any, record: IClass) => (
                 <Space>
                     <Button onClick={() => mutationDelete.mutate(String(record._id))}>Xóa</Button>
                     <Button>Sửa</Button>
@@ -86,7 +91,7 @@ const ClassPage = () => {
     return (
         <div>
             <div className="flex items-center justify-between gap-2">
-                <h1 className="mb-4 font-bold text-xl">Danh sách Giáo viên</h1>
+                <h1 className="mb-4 font-bold text-xl">Danh sách Lớp học</h1>
 
                 <div className="flex gap-2 items-center">
                     <Search

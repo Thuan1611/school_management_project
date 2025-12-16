@@ -1,0 +1,190 @@
+{
+
+  "teachers": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0e1",
+      "teacherId": "T001",
+      "name": "Nguyễn Văn An",
+      "email": "an.nguyen@school.com",
+      "photo": "https://randomuser.me/api/portraits/men/1.jpg",
+      "phone": "0123 456 789",
+      "subjects": ["Toán", "Lý"],
+      "classes": ["10A1", "11A2"],
+      "address": "123 Đường Lê Lợi, Quận 1, TP.HCM",
+      "createdAt": "2025-11-01T10:00:00.000Z",
+      "updatedAt": "2025-11-01T10:00:00.000Z"
+    },
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0e2",
+      "teacherId": "T002",
+      "name": "Trần Thị Bình",
+      "email": "binh.tran@school.com",
+      "photo": "https://randomuser.me/api/portraits/women/2.jpg",
+      "phone": "0987 654 321",
+      "subjects": ["Ngữ văn", "Lịch sử"],
+      "classes": ["10A2", "12A1"],
+      "address": "456 Nguyễn Huệ, Quận 3",
+      "createdAt": "2025-11-02T11:00:00.000Z",
+      "updatedAt": "2025-11-02T11:00:00.000Z"
+    },
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0e3",
+      "teacherId": "T003",
+      "name": "Lê Văn Cường",
+      "email": "cuong.le@school.com",
+      "photo": "https://randomuser.me/api/portraits/men/3.jpg",
+      "phone": "0909 111 222",
+      "subjects": ["Tiếng Anh", "Tin học"],
+      "classes": ["11A1", "12A3"],
+      "address": "789 Hai Bà Trưng, Quận 10",
+      "createdAt": "2025-11-03T12:00:00.000Z",
+      "updatedAt": "2025-11-03T12:00:00.000Z"
+    }
+  ],
+
+  "students": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0e4",
+      "studentId": "S001",
+      "name": "Trần Thị Bé",
+      "email": "be.tran@student.com",
+      "photo": "https://randomuser.me/api/portraits/women/12.jpg",
+      "phone": "0333 444 555",
+      "grade": 10,
+      "class": "10A1",
+      "address": "Quận Bình Thạnh, TP.HCM",
+      "createdAt": "2025-11-01T10:00:00.000Z",
+      "updatedAt": "2025-11-01T10:00:00.000Z"
+    },
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0e5",
+      "studentId": "S002",
+      "name": "Nguyễn Văn Tí",
+      "email": "ti.nguyen@student.com",
+      "photo": "https://randomuser.me/api/portraits/men/15.jpg",
+      "phone": "0355 666 777",
+      "grade": 11,
+      "class": "11A2",
+      "address": "Quận 7, TP.HCM",
+      "createdAt": "2025-11-02T11:00:00.000Z",
+      "updatedAt": "2025-11-02T11:00:00.000Z"
+    }
+  ],
+
+  "parents": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0e6",
+      "name": "Phạm Văn Cha",
+      "students": ["67a1b2c3d4e5f6a7b8c9d0e4"],
+      "email": "cha.pham@gmail.com",
+      "phone": "0901 234 567",
+      "address": "Quận Bình Thạnh",
+      "createdAt": "2025-11-01T10:00:00.000Z",
+      "updatedAt": "2025-11-01T10:00:00.000Z"
+    }
+  ],
+
+  "subjects": [
+    { "_id": "67a1b2c3d4e5f6a7b8c9d0e7", "name": "Toán học" },
+    { "_id": "67a1b2c3d4e5f6a7b8c9d0e8", "name": "Vật lý" },
+    { "_id": "67a1b2c3d4e5f6a7b8c9d0e9", "name": "Hóa học" },
+    { "_id": "67a1b2c3d4e5f6a7b8c9d0ea", "name": "Ngữ văn" },
+    { "_id": "67a1b2c3d4e5f6a7b8c9d0eb", "name": "Tiếng Anh" }
+  ],
+
+  "classes": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0ec",
+      "name": "10A1",
+      "capacity": 35,
+      "grade": 10,
+      "supervisor": "67a1b2c3d4e5f6a7b8c9d0e1"
+    },
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0ed",
+      "name": "10A2",
+      "capacity": 32,
+      "grade": 10,
+      "supervisor": "67a1b2c3d4e5f6a7b8c9d0e2"
+    }
+  ],
+
+  "lessons": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0ee",
+      "subject": "Toán",
+      "class": "10A1",
+      "teacher": "67a1b2c3d4e5f6a7b8c9d0e1",
+      "day": "Monday",
+      "startTime": "08:00",
+      "endTime": "09:30"
+    },
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0ef",
+      "subject": "Ngữ văn",
+      "class": "10A1",
+      "teacher": "67a1b2c3d4e5f6a7b8c9d0e2",
+      "day": "Monday",
+      "startTime": "09:45",
+      "endTime": "11:15"
+    }
+  ],
+
+  "exams": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0f0",
+      "subject": "Toán",
+      "class": "10A1",
+      "teacher": "67a1b2c3d4e5f6a7b8c9d0e1",
+      "date": "2025-12-15"
+    }
+  ],
+
+  "results": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0f1",
+      "subject": "Toán",
+      "student": "67a1b2c3d4e5f6a7b8c9d0e4",
+      "class": "10A1",
+      "teacher": "67a1b2c3d4e5f6a7b8c9d0e1",
+      "score": 8.5,
+      "date": "2025-06-10"
+    }
+  ],
+
+  "events": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0f2",
+      "title": "Họp phụ huynh học kỳ I",
+      "date": "2025-12-20",
+      "startTime": "14:00",
+      "endTime": "16:00",
+      "description": "Họp tổng kết học kỳ I"
+    }
+  ],
+
+  "announcements": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0f3",
+      "title": "Nghỉ Tết Nguyên Đán 2026",
+      "class": "Toàn trường",
+      "date": "2025-11-25",
+      "description": "Nghỉ từ 25/01/2026 đến 02/02/2026"
+    }
+  ],
+
+  "studentLessons": [
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0f4",
+      "title": "Toán - Thầy An",
+      "start": "2025-11-25T08:00:00",
+      "end": "2025-11-25T09:30:00"
+    },
+    {
+      "_id": "67a1b2c3d4e5f6a7b8c9d0f5",
+      "title": "Văn - Cô Bình",
+      "start": "2025-11-25T09:45:00",
+      "end": "2025-11-25T11:15:00"
+    }
+  ]
+}

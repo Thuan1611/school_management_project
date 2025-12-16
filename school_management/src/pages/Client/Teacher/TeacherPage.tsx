@@ -98,6 +98,7 @@ const TeacherPage = () => {
                 record?.subjects?.length > 0 ? (
                     record?.subjects?.map((subjectId) => {
                         const data = dataSubject?.find((s: ISubject) => s._id === subjectId);
+                        console.log(dataSubject);
                         return <Tag>{data?.name}</Tag>;
                     })
                 ) : (
@@ -164,7 +165,12 @@ const TeacherPage = () => {
                     </FormModalTeacher>
                 </div>
             </div>
-            <Table className="mt-4" columns={columns} dataSource={dataTeacher} rowKey={`_id`} />
+            <Table
+                className="mt-4"
+                columns={columns}
+                dataSource={dataTeacher}
+                rowKey={(record: ITeacher) => String(record._id)}
+            />
         </div>
     );
 };
