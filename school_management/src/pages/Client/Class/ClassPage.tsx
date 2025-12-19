@@ -13,6 +13,9 @@ import { deleteClass, getClass } from '../../../api/classes';
 import type { IClass } from '../../../types/IClass';
 import { getTeacher } from '../../../api/teacher';
 import type { ITeacher } from '../../../types/ITeacher';
+import FormModalClass from './FormModalClass';
+import { UserAddOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 const ClassPage = () => {
     const key = 'classes';
@@ -54,6 +57,11 @@ const ClassPage = () => {
         {
             title: 'Tên lớp',
             dataIndex: 'name',
+            render: (text: string, record: any) => (
+                <Link to={`/classes/detail/${record._id}`} className="text-blue-600 hover:underline">
+                    <strong>{text}</strong>
+                </Link>
+            ),
         },
 
         {
@@ -71,7 +79,7 @@ const ClassPage = () => {
                 const data = dataTeacher?.find((c: ITeacher) => {
                     return String(c._id) === String(record.supervisor);
                 });
-                return data.name;
+                return data?.name;
             },
         },
         {
@@ -79,7 +87,9 @@ const ClassPage = () => {
             render: (_: any, record: IClass) => (
                 <Space>
                     <Button onClick={() => mutationDelete.mutate(String(record._id))}>Xóa</Button>
-                    <Button>Sửa</Button>
+                    <FormModalClass idClass={String(record._id)}>
+                        <Button>Sửa</Button>
+                    </FormModalClass>
                 </Space>
             ),
         },
@@ -111,7 +121,11 @@ const ClassPage = () => {
                         ]}
                         onChange={(e) => dispatch(setQueryFilter({ ...query, _sort: e }))}
                     />
-                    <Button>Thêm</Button>
+                    <FormModalClass>
+                        <Button style={{ fontSize: 16 }}>
+                            <UserAddOutlined />
+                        </Button>
+                    </FormModalClass>
                 </div>
             </div>
             <Table columns={columns} dataSource={data} rowKey="_id" />

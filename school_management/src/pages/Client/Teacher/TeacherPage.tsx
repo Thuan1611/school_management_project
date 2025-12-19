@@ -18,6 +18,8 @@ import FormModalTeacher from './FormModalTeacher';
 import { getTeacherAtRedux } from '../../../feature/teacherSlice';
 
 const TeacherPage = () => {
+    const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
     const dispatch = useAppDispatch();
     const query = useAppSelector((state) => state.filter.query);
     const queryDebounce = useDebounce(query, 500);
@@ -82,10 +84,10 @@ const TeacherPage = () => {
             title: 'Địa chỉ',
             dataIndex: 'address',
         },
-        // {
-        //     title: 'Ngày sinh',
-        //     dataIndex: 'birthday',
-        // },
+        {
+            title: 'email',
+            dataIndex: 'email',
+        },
         {
             title: 'Giới tính',
             dataIndex: 'sex',
@@ -106,7 +108,7 @@ const TeacherPage = () => {
                 ),
         },
         {
-            title: 'Chủ nhiệm lớp',
+            title: 'Lớp đang phụ trách',
             dataIndex: 'classes',
             render: (_: any, record: ITeacher) =>
                 record?.classes?.length > 0 ? (
@@ -120,14 +122,17 @@ const TeacherPage = () => {
         },
         {
             title: 'Actions',
-            render: (_: any, record: ITeacher) => (
-                <Space>
-                    <Button onClick={() => mutationDelete.mutate(String(record._id))}>Xóa</Button>
-                    <FormModalTeacher idTeacher={String(record._id)}>
-                        <Button>Sửa</Button>
-                    </FormModalTeacher>
-                </Space>
-            ),
+            render: (_: any, record: ITeacher) =>
+                user.role === 'admin' ? (
+                    <Space>
+                        <Button onClick={() => mutationDelete.mutate(String(record._id))}>Xóa</Button>
+                        <FormModalTeacher idTeacher={String(record._id)}>
+                            <Button>Sửa</Button>
+                        </FormModalTeacher>
+                    </Space>
+                ) : (
+                    <Tag>Teacher không có quyền</Tag>
+                ),
         },
     ];
 
@@ -158,11 +163,13 @@ const TeacherPage = () => {
                         onChange={(e) => dispatch(setQueryFilter({ ...query, sex: e }))}
                     />
                     {/* Modal Thêm sản phẩm */}
-                    <FormModalTeacher>
-                        <Button style={{ fontSize: 16 }}>
-                            <UserAddOutlined />
-                        </Button>
-                    </FormModalTeacher>
+                    {user.role === 'admin' && (
+                        <FormModalTeacher>
+                            <Button style={{ fontSize: 16 }}>
+                                <UserAddOutlined />
+                            </Button>
+                        </FormModalTeacher>
+                    )}
                 </div>
             </div>
             <Table

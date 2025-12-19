@@ -3,10 +3,14 @@ import type { IStudent } from '../types/IStudent';
 import { cleanParams } from '../ultis/cleanupParams';
 import api from './api';
 
-export const getStudent = async (query: IProductQuery ) => {
+export const getStudent = async (query: IProductQuery) => {
     const params = cleanParams(query);
     const { data } = await api.get('student', { params });
     return data;
+};
+export const getStudentsByClass = async (classId: string) => {
+    const { data } = await api.get(`/students?class=${classId}`); // hoặc endpoint backend của bạn
+    return data; // trả về mảng students
 };
 export const createStudent = async (body: IStudent) => {
     const { data } = await api.post('student', body);

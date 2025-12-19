@@ -2,15 +2,15 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { deleteSubject, getSubject } from '../../../api/subject';
 import { queryClient } from '../../../api/useQuery';
 import { toast } from 'react-toastify';
-import { getTeacher } from '../../../api/teacher';
-import { Button, Space, Spin, Table, Tag } from 'antd';
+// import { getTeacher } from '../../../api/teacher';
+import { Button, Space, Spin, Table } from 'antd';
 import type { ISubject } from '../../../types/ISubject';
 import FormModalSubject from './FormModalSubject';
 import { UserAddOutlined } from '@ant-design/icons';
 import { useAppDispatch, useAppSelector } from '../../../hooks/hooks';
 import { resetQueryFilter, setQueryFilter } from '../../../feature/querySLice';
 import Search from 'antd/es/input/Search';
-import type { ITeacher } from '../../../types/ITeacher';
+// import type { ITeacher } from '../../../types/ITeacher';
 
 const SubjectsPage = () => {
     const dispatch = useAppDispatch();
@@ -29,14 +29,14 @@ const SubjectsPage = () => {
         },
     });
 
-    //List DataClass
-    const { data: dataTeacher } = useQuery({
-        queryKey: ['teacher'],
-        queryFn: async () => {
-            const { data } = await getTeacher(query);
-            return data;
-        },
-    });
+    // //List DataClass
+    // const { data: dataTeacher } = useQuery({
+    //     queryKey: ['teacher'],
+    //     queryFn: async () => {
+    //         const { data } = await getTeacher(query);
+    //         return data;
+    //     },
+    // });
     //Xóa Teacher
     const mutationDelete = useMutation({
         mutationKey: ['subject'],
@@ -56,19 +56,19 @@ const SubjectsPage = () => {
             title: 'Tên môn học',
             dataIndex: 'name',
         },
-        {
-            title: 'Giáo viên dạy',
-            dataIndex: 'subjects',
-            render: (_: any, record: ISubject) =>
-                record?.teachers?.length > 0 ? (
-                    record?.teachers?.map((teacherId) => {
-                        const data = dataTeacher?.find((s: ITeacher) => String(s._id) === String(teacherId));
-                        return <Tag>{data?.name}</Tag>;
-                    })
-                ) : (
-                    <div>Chưa có</div>
-                ),
-        },
+        // {
+        //     title: 'Giáo viên dạy',
+        //     dataIndex: 'subjects',
+        //     render: (_: any, record: ISubject) =>
+        //         record?.teachers?.length > 0 ? (
+        //             record?.teachers?.map((teacherId) => {
+        //                 const data = dataTeacher?.find((s: ITeacher) => String(s._id) === String(teacherId));
+        //                 return <Tag>{data?.name}</Tag>;
+        //             })
+        //         ) : (
+        //             <div>Chưa có</div>
+        //         ),
+        // },
         {
             title: 'Actions',
             render: (_: any, record: ISubject) => (

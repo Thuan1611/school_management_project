@@ -1,12 +1,13 @@
 export interface ITeacher {
-    _id?: string | number; // ID từ DB (MongoDB ObjectId)
-    teacherId?: string; // Mã giáo viên riêng (ví dụ: GV001)
+    _id?: string | number;
     name: string;
+    password?: string; // optional vì khi update có thể không cần
     email: string;
     sex: 'female' | 'male';
-    photo?: string; // ảnh đại diện
+    photo: string;
     phone: string;
-    subjects: string[]; // môn dạy
-    classes: string[]; // lớp đang phụ trách
+    subjects: string[];
+    classes: string[];
     address: string;
+    role: 'teacher';
 }

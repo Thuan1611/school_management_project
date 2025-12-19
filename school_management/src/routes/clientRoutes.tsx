@@ -2,8 +2,11 @@ import LayoutClient from '../layouts/LayoutClient';
 import AdminPage from '../pages/Client/Admin/AdminPage';
 import ClassPage from '../pages/Client/Class/ClassPage';
 import ListStudent from '../pages/Client/Student/ListStudent';
+import StudentPage from '../pages/Client/Student/StudentPage';
 import SubjectsPage from '../pages/Client/Subjects/SubjectsPage';
 import TeacherPage from '../pages/Client/Teacher/TeacherPage';
+import EventPage from '../pages/Client/Events/EventPage';
+import ClassDetailPage from '../pages/Client/Class/ClassDetail';
 
 const clientRoutes = [
     {
@@ -17,6 +20,10 @@ const clientRoutes = [
             {
                 path: 'students',
                 Component: ListStudent,
+            },
+            {
+                path: 'student',
+                Component: StudentPage,
             },
             {
                 path: 'students/:id',
@@ -45,6 +52,17 @@ const clientRoutes = [
             {
                 path: 'classes/:id',
                 Component: ClassPage,
+            },
+            {
+                path: 'classes/detail/:id',
+                Component: ClassDetailPage,
+            },
+            {
+                path: 'events',
+                Component: EventPage,
+            }, {
+                path: 'events/:id',
+                Component: EventPage,
             },
         ],
     },

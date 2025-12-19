@@ -1,9 +1,9 @@
-import type { ITeacher } from "./ITeacher";
 
 export interface IClass {
-  _id: string;
+  _id?: string;
   name: string;
-  capacity: number;
+  capacity?: number;
+  studentIds: string[];   // danh sách học sinh
   grade: number;
-  supervisor: ITeacher;
+  supervisor:  string;
 }

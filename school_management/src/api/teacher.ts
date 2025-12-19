@@ -5,22 +5,22 @@ import api from './api';
 
 export const getTeacher = async (query: IProductQuery) => {
     const params = cleanParams(query);
-    const { data } = await api.get('teacher', { params });
+    const { data } = await api.get('user/?role=teacher', { params });
     return data;
 };
 export const createTeacher = async (body: ITeacher) => {
-    const { data } = await api.post('teacher', body);
+    const { data } = await api.post('user', body);
     return data;
 };
 export const getTeacherDetail = async (id: string) => {
-    const { data } = await api.get(`teacher/${id}`);
+    const { data } = await api.get(`user/${id}`);
     return { data };
 };
 export const updateTeacher = async (id: string, body: ITeacher) => {
-    const { data } = await api.put(`teacher/${id}`, body);
+    const { data } = await api.put(`user/${id}`, body);
     return { data };
 };
 export const deleteTeacher = async (id: string) => {
-    const { data } = await api.delete(`teacher/${id}`);
+    const { data } = await api.delete(`user/${id}`);
     return { data };
 };
