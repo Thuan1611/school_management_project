@@ -9,7 +9,7 @@ import 'temporal-polyfill/global';
 import { mapEventsToScheduleX } from '../ultis/mapEventsToScheduleX';
 type Props = {
     events: any[];
-    classMap: Map<string, string>;
+    classMap: Map<any, any>;
     isTeacherView?: boolean; // true nếu là trang teacher
 };
 const BigCalendar = ({ events, classMap }: Props) => {

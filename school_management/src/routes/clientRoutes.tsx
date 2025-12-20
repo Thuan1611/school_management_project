@@ -14,7 +14,6 @@ const clientRoutes = [
         element: <LayoutClient />,
         children: [
             {
-                index: true,
                 Component: AdminPage,
             },
             {

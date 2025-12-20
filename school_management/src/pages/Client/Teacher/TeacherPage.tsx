@@ -163,7 +163,7 @@ const TeacherPage = () => {
                         onChange={(e) => dispatch(setQueryFilter({ ...query, sex: e }))}
                     />
                     {/* Modal Thêm sản phẩm */}
-                    {user.role === 'admin' && (
+                    {user.role == 'admin' && (
                         <FormModalTeacher>
                             <Button style={{ fontSize: 16 }}>
                                 <UserAddOutlined />

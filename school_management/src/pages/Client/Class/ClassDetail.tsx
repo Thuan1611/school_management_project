@@ -9,12 +9,13 @@ import { getTeacher } from '../../../api/teacher';
 import { getStudent } from '../../../api/student';
 import type { IStudent } from '../../../types/IStudent';
 import { useParams } from 'react-router-dom';
+import { useAppSelector } from '../../../hooks/hooks';
 
 const { Search } = Input;
 
 const ClassDetailPage = () => {
     const { id } = useParams(); // id lớp từ URL
-
+    const query = useAppSelector((state) => state.filter.query);
     // Lấy chi tiết lớp (bao gồm danh sách học sinh)
     const { data: classData, isLoading } = useQuery({
         queryKey: ['class', id],
@@ -29,14 +30,14 @@ const ClassDetailPage = () => {
     const { data: teachers } = useQuery({
         queryKey: ['teacher'],
         queryFn: async () => {
-            const { data } = await getTeacher();
+            const { data } = await getTeacher(query);
             return data;
         },
     });
     const { data: students } = useQuery({
         queryKey: ['student'],
         queryFn: async () => {
-            const { data } = await getStudent();
+            const { data } = await getStudent(query);
             return data;
         },
     });
@@ -71,7 +72,7 @@ const ClassDetailPage = () => {
             sorter: (a: any, b: any) => a.name.localeCompare(b.name),
             render: (text: string) => <strong>{text}</strong>,
         },
-        { title: 'Ngày sinh', dataIndex: 'birthday', render: (text: string) => text || 'Chưa cập nhật' },
+        // { title: 'Ngày sinh', dataIndex: 'birthday', render: (text: string) => text || 'Chưa cập nhật' },
         {
             title: 'Giới tính',
             dataIndex: 'gender',

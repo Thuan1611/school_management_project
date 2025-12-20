@@ -11,9 +11,12 @@ import type { IClass } from '../../../types/IClass';
 import { classSchema } from '../../../schema/classSchema';
 import { getTeacher } from '../../../api/teacher';
 import { getStudent } from '../../../api/student';
+import { useAppSelector } from '../../../hooks/hooks';
 
 type Props = { children: ReactElement; idClass?: string };
 const FormModalClass = ({ children, idClass }: Props) => {
+    const query = useAppSelector((state) => state.filter.query);
+
     const navi = useNavigate();
     const [disable, setDisable] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -31,7 +34,7 @@ const FormModalClass = ({ children, idClass }: Props) => {
     const { data: dataTeacher } = useQuery({
         queryKey: ['teacher'],
         queryFn: async () => {
-            const { data } = await getTeacher();
+            const { data } = await getTeacher(query);
             return data;
         },
     });
@@ -50,7 +53,7 @@ const FormModalClass = ({ children, idClass }: Props) => {
     const { data: dataStudent } = useQuery({
         queryKey: ['student'],
         queryFn: async () => {
-            const { data } = await getStudent();
+            const { data } = await getStudent(query);
             return data;
         },
     });
